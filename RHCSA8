@@ -1,1 +1,46 @@
-RHCSA8
+RHCSA8 Objetives with answer and exercises 
+
+Understand and use essential tools
+    • Access a shell prompt and issue commands with correct syntax
+    
+    $ssh -l USER HOST
+    $ssh USER@HOST
+        
+    • Use input-output redirection (>, >>, |, 2>, etc.)
+    
+    $ls > files   -- Redirects the output to a new file named files
+    --
+    $echo line 1 > test -- echo prints the text line 1 and this output is sended to the new file test
+    $cat test
+     line 1
+    --
+    $ echo line 2 >> users
+    $ cat users
+      line 1
+      line 2
+    $
+    --
+    $ wc -l users
+    2 users
+    $
+    --
+    $ wc -l < users
+      2
+    $
+    --
+    $ command > /dev/null 2>&1 
+    
+    Here 2 represents STDERR and 1 represents STDOUT. You can display a message on to STDERR by redirecting STDOUT into STDERR as follows −
+
+    $ echo message 1>&2
+    
+    • Use grep and regular expressions to analyze text
+    • Access remote systems using SSH
+    • Log in and switch users in multiuser targets
+    • Archive, compress, unpack, and uncompress files using tar, star, gzip, and bzip2
+    • Create and edit text files
+    • Create, delete, copy, and move files and directories
+    • Create hard and soft links
+    • List, set, and change standard ugo/rwx permissions
+    • Locate, read, and use system documentation including man, info, and files in /usr/share/doc
+
