@@ -43,4 +43,49 @@ Understand and use essential tools
     • Create hard and soft links
     • List, set, and change standard ugo/rwx permissions
     • Locate, read, and use system documentation including man, info, and files in /usr/share/doc
+    
+ 1)
+    Reset root password
+    edit into grub with 'e'
+    ad after quiet rd.break into the linux line
+    mount -o remount,rw /sysroot
+    chroot /sysroot
+    su -
+    passwd
+    touch /.autorelabel
+    exit
+    exit
+    logout
+    
+  2)
+    yum-config-manager --add-repo http://ipa.eight.example.com/rpms/
+    yum update
+    yum upgrade
+  
+  3)
+    tzselect 
+    date
+    cd /etc/
+    vim chrony.conf  -- Add the server
+    systemctl restart chronyd.service
+    chronyc sources
+    
+  4)
+    nmtui
+    or edit /etc/sysconfig/network-scripts
+  5)
+    sysctl -w net.ipv4.ip_forward=1
+    vim /etc/sysctl.conf   
+  6)
+    systemctl get-default
+    systemctl enable multi-user.target
+    systemctl set-default multi-user.target
+    
+    vim /etc/default/grub 
+     ---> remove rgb + quiet
+    grub2-mkconfig -o /boot/grub2/grub.cfg
+    
+  7)
+    
+    
 
