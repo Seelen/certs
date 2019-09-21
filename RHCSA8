@@ -86,6 +86,51 @@ Understand and use essential tools
     grub2-mkconfig -o /boot/grub2/grub.cfg
     
   7)
+    lsblk 
+    wipefs -a /dev/sdb
+    ls
+    fdisk -l  ---> See options inside to create the partition
+    fdisk /dev/sdb 
+    lsblk 
+    partprobe /dev/sdb1
+  
+  8)
+    vgdisplay 
+    vgcreate vgprac /dev/sdb1 
+    vgdisplay 
+  
+  9)
+    lvcreate -L 500MB -n lvprac vgprac
+    lsblk 
+    mkfs.xfs /dev/mapper/vgprac-lvprac 
+    mkdir /mnt/lvprac/
+    ls /mnt
+    vim /etc/fstab --> Add this line
+            /dev/mapper/vgprac-lvprac /mnt/lvprac               xfs     defaults        0 0
+    mount -a
+    ---- to check the mounted unit
+    touch /mnt/lvprac/test1
+    ls /mnt/lvprac ----> show the file test1 inside the unit
+    umount /mnt/lvprac
+    ls /mnt/lvprac ---> no file inside because the unit is unmount
+    mount -a
+    ls /mnt/lvprac  ---> show the file again
+  
+  10)
+    lvextend -L +500 /dev/vgprac/lvprac /dev/sdb1
+  
+  11)
+    lvcreate -L 100M -T vgprac/thipool
+    lvs
+    lvcreate -V1T -T vgprac/thipool -n thinvolume
+    
+  12)
+    
+    
+
+
+    
+
     
     
 
