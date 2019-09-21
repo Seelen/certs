@@ -125,7 +125,35 @@ Understand and use essential tools
     lvcreate -V1T -T vgprac/thipool -n thinvolume
     
   12)
+    dnf update
+    dnf upgradednf 
+    dnf install httpd
+    systemctl enable httpd
+    systemctl start httpd
+    firewall-cmd --zone=public --permanent --add-service=http
+    firewall-cmd --reload
+    echo "Welcome to the web server" > /var/www/html/index.html
+    curl 192.168.55.151
+  
+  13)
+    mkdir /find/largefiles
+    find ./ -size +5M -exec cp {} /find/largefiles/ \;
     
+  14)
+    vim awesome.sh
+        #!/bin/bash
+        if [ "$1" = "me" ] ; then
+            echo "Yes,I'm awesome."
+        elif [ "$1" = "them" ]; then
+            echo "Okay, they are awesome."
+        else
+            echo "Usage ./awesome.sh me|them"
+        fi
+     chmod ugo+x awsome.sh
+   
+   15)
+
+
     
 
 
