@@ -168,8 +168,14 @@ Understand and use essential tools
      authconfig --passminlen=8 --update
      
    16)
-
-     
+    chown laura.accounting /accounting
+    chown steward.marketing /marketing
+    chmod g+s,o+t /accounting
+    chmod g+s,o+t /marketing
+    
+   17)
+    crontab -e
+     ---> 0 0 * * 1-5    echo "This practice exam was easy and I'm ready to ace my RHCSA" > /var/log/messages
 
       
 
