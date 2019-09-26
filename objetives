@@ -1,5 +1,8 @@
+---
 Understand and use essential tools
-  Access a shell prompt and issue commands with correct syntax
+---
+
+Access a shell prompt and issue commands with correct syntax
   
   
   Use input-output redirection (>, >>, |, 2>, etc.)
@@ -49,21 +52,102 @@ Understand and use essential tools
     # mv directory /to/directory1
   
   Create hard and soft links
+  
+    # ln /root/test /root/hardlink (if main is deltede the file still works)
+    # ln -s /root/hardlink /root/softlink (is a direct access, if the main file is deleted the links doesnt work)
+  
   List, set, and change standard ugo/rwx permissions
+  
   Locate, read, and use system documentation including man, info, and files in /usr/share/doc
+  
+    # mandb
+    # apropos
+    # man -K text 
 
-
+---
 Operate running systems
-Boot, reboot, and shut down a system normally
-Boot systems into different targets manually
-Interrupt the boot process in order to gain access to a system
-Identify CPU/memory intensive processes and kill processes
-Adjust process scheduling
-Locate and interpret system log files and journals
-Preserve system journals
-Start, stop, and check the status of network services
-Securely transfer files between systems
+---
+
+  Boot, reboot, and shut down a system normally
+
+    # reboot
+    # halt -p
+
+  Boot systems into different targets manually
+    
+    # vim /etc/inittab ---> for help about targets
+    # systemctl set-default TARGET.target ---> to set default target 
+        rescue: to move to single user mode/maintenance level with mounted local file systems,
+        emergency: to move to single user mode/maintenance with only /root mounted file system,
+        isolate multi-user.target: to move to multi-user level without graphical interface (equivalent to previous run level 3),
+        sisolate graphical.target: to move to multi-user level with graphical interface (equivalent to previous run level 5),
+        set-default graphical.target: to set the default run level to multi-user graphical mode,
+        get-default: to get the default run level.    
+     
+     # systemd.unit=graphical.target ---> In the grub menu to set target by default at boot
+    
+  Interrupt the boot process in order to gain access to a system (Reset root password)
+  
+    ---> edit into grub with 'e'
+    ---> add after quiet rd.break into the linux line
+    # mount -o remount,rw /sysroot
+    # chroot /sysroot
+    # su -
+    # passwd
+    # touch /.autorelabel
+    # exit
+    # exit
+    # logout
+    
+  Identify CPU/memory intensive processes and kill processes
+    
+    # top
+    
+  Adjust process scheduling
+
+    # chrt -(priority) -p(0-99) process
+    # chrt -p process --->to show
+    
+    # tuned --> maibe 
+   
+  Locate and interpret system log files and journals
+  
+    System log files are stored in /var/log as with most applications.  SELINUX log in 
+    /var/log/audit/audit.log
+    SystemD application has been added to allow us to analyse the boot process.
+   
+    # systemd-analyze  ---> To get the boot process duration
+    # systemd-analyze blame --->To get the time spent by each task during the boot process
+    # journalctl ---> To view the log:
+    # journalctl /sbin/crond  ---> To get all the events related to the crond process in the journal
+    # journalctl -b  ---> To get all the events since the last boot
+    # journalctl -p err ---> To get all the events with a syslog priority of err
+    # journalctl -f  ---> To get the 10 last events and wait for any new one (like tail -f /var/log/messages)
+  
+  Preserve system journals
+    
+    # mkdir /var/log/journal
+    # vim /etc/systemd/journald.conf ---> enable auto
+    # systemctl restart systemd-journald
+    
+  Start, stop, and check the status of network services
+  
+    # systemctl start|stop|restart|status service
+    
+    # systemctl mask sshd  ---> Masking a service prevents it from starting even if it is socket-activated or dbus-activated.
+    # systemctl unmask sshd  ---> To enable the service again:
+
+    
+  Securely transfer files between systems
+
+    # sftp user@ip.add.re.ss ---> then use cd, put, get
+    
+    # scp /home/SomeUser/* user@ip.add.re.ss:/tmp   --->To transfer all files from a specified directory (here /tmp) 
+
+---
 Configure local storage
+---
+
 List, create, delete partitions on MBR and GPT disks
 Create and remove physical volumes
 Assign physical volumes to volume groups
