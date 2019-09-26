@@ -148,12 +148,48 @@ Operate running systems
 Configure local storage
 ---
 
-List, create, delete partitions on MBR and GPT disks
-Create and remove physical volumes
-Assign physical volumes to volume groups
-Create and delete logical volumes
-Configure systems to mount file systems at boot by universally unique ID (UUID) or label
-Add new partitions and logical volumes, and swap to a system non-destructively
+  List, create, delete partitions on MBR and GPT disks
+    
+    # fdisk -l
+    # fdisk ---> to create and modify
+    # partprobe
+    # blkid ---> to show UUID mapper
+    
+    # lsblk
+    
+  Create and remove physical volumes
+    
+    # fdisk
+    
+  Assign physical volumes to volume groups
+    
+    # vgdisplay 
+    # vgcreate GroupName /dev/device
+    # vgdisplay 
+ 
+  Create and delete logical volumes
+  
+    # lvcreate -L 500MB -n VolumeName GroupName
+    # lsblk 
+    # mkfs.xfs /dev/mapper/GroupName-VolumeName 
+  
+  Configure systems to mount file systems at boot by universally unique ID (UUID) or label
+     # mkdir /mnt/Directory/
+     # ls /mnt
+     # blkid  ---> to get the UUID
+     # vim /etc/fstab --> Add this line
+            UUID=252a647d-fc5a-495a-bfd8-46d1bb8ad17f /mnt/Directory                  xfs     defaults        0 0
+     # mount -a
+
+  Add new partitions and logical volumes, and swap to a system non-destructively
+     
+     # fdisk ---> to create a new swap partition (type 82)
+     # mkswap /dev/NewSwapPartition  ---> to format
+     # swapon /dev/NewSwapPartition  ---> to mount
+     # vim /etc/fstab --> Add this line
+            /dev/NewSwapPartition swap                    swap    defaults        0 0
+     # mount -a
+      
 Create and configure file systems
 Create, mount, unmount, and use vfat, ext4, and xfs file systems
 Mount and unmount network file systems using NFS
