@@ -308,17 +308,54 @@ Manage basic networking
 ---
 
   Configure IPv4 and IPv6 addresses
+  
+    # nmcli
+    # nmtui ---> hostname and interfaces
+  
   Configure hostname resolution
+  
+    # hostnamectl status
+    # hostnamectl set-hostname name
+  
   Configure network services to start automatically at boot
+  
+    # systemctl enable service
+    
   Restrict network access using firewall-cmd/firewall
+  
+    # firewall-cmd --remove-service=cockpit --permanent
+    # firewall-cmd --remove-service=dhcpv6-client --permanent
+    # sudo firewall-cmd --reload
+    
+    # firewall-cmd --zone=public --add-service=https --permanent
+    # firewall-cmd --reload
+    # firewall-cmd --list-services
+    
+    # firewall-cmd --get-services
+        
 
 ---
 Manage users and groups
 ---
   
   Create, delete, and modify local user accounts
+  
+    # useradd
+    # groupadd
+  
   Change passwords and adjust password aging for local user accounts
+  
+    # passwd user
+    # chage -M 60 user ---> change password expire
+    
+    ----
+    Length of password
+    -----
+        # vim /etc/security/pwquality.conf  --> uncoment minlen=8 OR
+        # authconfig --passminlen=8 --update
+  
   Create, delete, and modify local groups and group memberships
+  
   Configure superuser access
 
 ---
