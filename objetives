@@ -296,6 +296,7 @@ Deploy, configure, and maintain systems
     # dnf module info ModuleName
     # dnf module info --profile ModuleName:(Stream Number)
     # dnf install @ModuleName ---> with module active 
+    https://www.youtube.com/watch?v=tjhTzVsFxl8
     
   Modify the system bootloader
   
@@ -355,9 +356,25 @@ Manage users and groups
         # authconfig --passminlen=8 --update
   
   Create, delete, and modify local groups and group memberships
+        
+        # groupadd accounting 
+        # groupadd marketing
+        # useradd phil -G accounting 
+        # useradd laura -G accounting 
+        # useradd steward -G marketing 
+        # useradd kevin -G marketing 
+        # touch /home/{phil,laura,steward,kevin}/Welcome
+        # chage -M 60 phil ---> change password expire
+        # chage -M 60 laura
+        # chage -M 60 steward
+        # chage -M 60 kevin
+        # chage -l phil --- >to check
   
   Configure superuser access
-
+        
+        # usermod -aG wheel USERNAME
+        # visudo
+     
 ---
 Manage security
 ---
