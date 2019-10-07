@@ -58,9 +58,9 @@ Understand and use essential tools
     logout
     
   2)
-    yum-config-manager --add-repo http://ipa.eight.example.com/rpms/
-    yum update
-    yum upgrade
+    dnf config-manager --add-repo http://repo.eight.example.com/AppStream
+    dnf update
+    dnf upgrade
   
   3)
     tzselect 
