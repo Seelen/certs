@@ -57,6 +57,9 @@ Access a shell prompt and issue commands with correct syntax
     # ln -s /root/hardlink /root/softlink (is a direct access, if the main file is deleted the links doesnt work)
   
   List, set, and change standard ugo/rwx permissions
+    
+    # ls -la
+    # chmod 
   
   Locate, read, and use system documentation including man, info, and files in /usr/share/doc
   
@@ -77,6 +80,7 @@ Operate running systems
     
     # vim /etc/inittab ---> for help about targets
     # systemctl set-default TARGET.target ---> to set default target 
+        
         rescue: to move to single user mode/maintenance level with mounted local file systems,
         emergency: to move to single user mode/maintenance with only /root mounted file system,
         isolate multi-user.target: to move to multi-user level without graphical interface (equivalent to previous run level 3),
