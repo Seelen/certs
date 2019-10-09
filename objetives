@@ -112,7 +112,7 @@ Operate running systems
     # chrt -(priority) -p(0-99) process
     # chrt -p process --->to show
     
-    # tuned --> maibe 
+    # tuned --> for all the system
    
   Locate and interpret system log files and journals
   
@@ -202,7 +202,6 @@ Create and configure file systems
     
     # mount
     # mkfs.ext4 /dev/DeviceToFormat  ---> change ext4 to xfs or vfat for xfs or vfat format
-    # umount
     
   Mount and unmount network file systems using NFS
   
@@ -220,6 +219,7 @@ Create and configure file systems
     # mkdir /home/shared
     # chown nobody:team /home/shared
     # chmod g+ws,o-rwx /home/shared
+   
    Create the two users and assign them the team group in addition to their own group:
     # useradd -G team user01
     # useradd -G team user02
@@ -300,6 +300,7 @@ Deploy, configure, and maintain systems
     # dnf module info ModuleName
     # dnf module info --profile ModuleName:(Stream Number)
     # dnf install @ModuleName ---> with module active 
+    # dnf provides ModuleName  ---> to show wath package provides watsh app
     https://www.youtube.com/watch?v=tjhTzVsFxl8
     
   Modify the system bootloader
